@@ -313,11 +313,12 @@ main { position: relative; }
   .row__m { display: none; }
   .index { padding-left: var(--gutter); padding-right: var(--gutter); }
   .index__head { grid-template-columns: 1fr; }
-  .finale__cta { left: auto; right: var(--gutter); top: 40vh; width: 96px; height: 96px; }
+  .finale__cta { left: auto; right: var(--gutter); top: auto; bottom: 20vh; width: 92px; height: 92px; }
   .finale__cta-inner .serif { font-size: 24px; }
   .finale__head { left: var(--gutter); }
-  .finale__foot { left: var(--gutter); bottom: 22vh; }
-  .finale__core { left: 50%; top: 58%; width: 62vw; height: 62vw; }
+  .finale__foot { left: var(--gutter); bottom: 21vh; }
+  .finale__foot > span:nth-child(2) { display: none; }
+  .finale__core { left: 50%; top: 47%; width: 56vw; height: 56vw; }
   .morph__top { left: var(--gutter); right: var(--gutter); flex-direction: column; gap: 14px; }
   .morph__bottom { left: var(--gutter); right: var(--gutter); }
 }

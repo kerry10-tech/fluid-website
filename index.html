@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#08080a" />
+    <title>FLUID — Matter in Motion</title>
+    <meta name="description" content="FLUID — an atlas of liquid light. A cinematic study of light moving through water, glass, vapor and chrome, rendered live in the browser." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='22' fill='%23ece7de'/%3E%3C/svg%3E" />
+  </head>
+  <body class="is-loading">
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- ───────────── Preloader ───────────── -->
+    <div class="loader" aria-hidden="true">
+      <div class="loader__top mono">
+        <span>FLUID — Visual Research</span>
+        <span>Vol. 01 / Matter in Motion</span>
+      </div>
+      <div class="loader__count display"><span class="loader__num">000</span></div>
+      <div class="loader__line"><span></span></div>
+      <div class="loader__bottom mono">
+        <span class="loader__status">Compiling light</span>
+        <span>No photographs. No video. Only mathematics.</span>
+      </div>
+    </div>
+
+    <!-- ───────────── Cursor ───────────── -->
+    <div class="cursor" aria-hidden="true">
+      <div class="cursor__ring"><span class="cursor__label mono"></span></div>
+      <div class="cursor__dot"></div>
+    </div>
+
+    <!-- ───────────── HUD ───────────── -->
+    <header class="hud">
+      <a class="hud__logo magnetic" href="#top" data-scroll-to="0" aria-label="Fluid, back to top">
+        <span class="hud__mark"></span><span class="hud__word">FLUID</span><sup>®</sup>
+      </a>
+      <div class="hud__chapter mono" aria-live="polite">
+        <span class="hud__num">00</span><span class="hud__sep">/</span><span class="hud__total">07</span>
+        <span class="hud__name">Overture</span>
+      </div>
+      <nav class="hud__nav mono">
+        <a href="#manifesto" data-scroll-to="#manifesto" class="magnetic">Manifesto</a>
+        <a href="#studies" data-scroll-to="#studies" class="magnetic">Studies</a>
+        <a href="#index" data-scroll-to="#index" class="magnetic">Index</a>
+        <a href="#finale" data-scroll-to="#finale" class="hud__cta magnetic"><span>Contact</span></a>
+      </nav>
+    </header>
+
+    <div class="rail" aria-hidden="true">
+      <div class="rail__track"><div class="rail__fill"></div></div>
+      <span class="rail__pct mono">000</span>
+    </div>
+
+    <main id="top">
+      <!-- ───────────── 00 · HERO ───────────── -->
+      <section class="hero" id="hero" data-chapter="Overture">
+        <h1 class="sr-only">FLUID — Matter in motion. An atlas of liquid light.</h1>
+
+        <div class="hero__side mono">
+          <span>Atlas of liquid light</span><span class="dash"></span><span>Exp. 2026</span>
+        </div>
+
+        <p class="hero__lede reveal-up">
+          <span class="mono hero__idx">(00)</span>
+          <span class="serif">A study of light</span>
+          <span class="hero__lede-2">moving through matter</span>
+        </p>
+
+        <div class="hero__readout mono reveal-up">
+          <span>Refractive index <b class="js-ior">1.333</b></span>
+          <span>Surface tension <b class="js-tension">72.8</b> mN/m</span>
+          <span>Frame <b class="js-frame">000000</b></span>
+        </div>
+
+        <div class="hero__scroll mono reveal-up">
+          <span>Scroll to descend</span>
+          <span class="hero__scroll-line"><i></i></span>
+        </div>
+
+        <div class="hero__coords mono reveal-up">
+          <span>46°12′N</span><span>06°09′E</span><span class="js-clock">00:00:00</span>
+        </div>
+      </section>
+
+      <!-- ───────────── 01 · MANIFESTO ───────────── -->
+      <section class="manifesto" id="manifesto" data-chapter="Manifesto">
+        <div class="manifesto__pin">
+          <div class="manifesto__label mono"><span>(01)</span><span>Manifesto</span></div>
+          <p class="manifesto__text display-m js-words">
+            Matter,<span class="slot" data-blob-slot></span>in motion.
+            We don’t shape <em>objects</em>. We choreograph
+            <span class="pill" data-gl-scene="0"></span> light as it bends,
+            pools <span class="pill pill--wide" data-gl-scene="3"></span> and
+            slowly <em>dissolves.</em>
+          </p>
+          <div class="manifesto__aside mono">
+            <p>Every frame on this page is computed live, in your browser, from mathematics alone. No photographs. No video. Just light, folded through imaginary matter.</p>
+          </div>
+          <div class="manifesto__num display" data-speed="-0.25" aria-hidden="true">01</div>
+        </div>
+      </section>
+
+      <!-- ───────────── 02 · JOURNEY (dive + horizontal studies) ───────────── -->
+      <section class="journey" id="studies" data-chapter="Studies">
+        <div class="journey__pin">
+          <!-- Dive layer -->
+          <div class="dive">
+            <div class="dive__core" data-blob-core></div>
+            <h2 class="dive__w dive__w--a display-xl">Step</h2>
+            <h2 class="dive__w dive__w--b display-xl">inside</h2>
+            <div class="dive__meta mono"><span>(02)</span><span>Into the drop</span></div>
+            <div class="dive__meta dive__meta--r mono"><span>Ø 4.2mm</span><span>t = 0.000s</span></div>
+          </div>
+
+          <!-- Horizontal track -->
+          <div class="track">
+            <article class="study study--1" data-cursor="Study I">
+              <div class="study__frame" data-gl-scene="0" data-gl-window></div>
+              <span class="study__num serif">I</span>
+              <div class="study__label">
+                <div class="mono"><b>Caustic</b><span>Light, folded by water</span></div>
+              </div>
+            </article>
+
+            <div class="track__title" data-hspeed="0.55">
+              <h2 class="display-xl"><span>Five states</span><span class="serif">of light</span></h2>
+              <p class="mono">A sequence of material studies. Each surface is a living equation — hover to disturb it.</p>
+            </div>
+
+            <article class="study study--2" data-cursor="Study II">
+              <div class="study__frame" data-gl-scene="1"></div>
+              <span class="study__num serif" data-hspeed="1.25">II</span>
+              <div class="study__label">
+                <div class="mono"><b>Chrome</b><span>A mirror that refuses to stay still</span></div>
+              </div>
+            </article>
+
+            <article class="study study--3" data-cursor="Study III">
+              <div class="study__frame" data-gl-scene="2"></div>
+              <span class="study__num serif" data-hspeed="1.2">III</span>
+              <div class="study__label">
+                <div class="mono"><b>Vapor</b><span>Breath, backlit</span></div>
+              </div>
+            </article>
+
+            <div class="track__quote" data-hspeed="0.7">
+              <p class="serif">“Light is the only material<br />that never stops moving.”</p>
+            </div>
+
+            <article class="study study--4" data-cursor="Study IV">
+              <div class="study__frame" data-gl-scene="3"></div>
+              <span class="study__num serif" data-hspeed="1.3">IV</span>
+              <div class="study__label">
+                <div class="mono"><b>Reed</b><span>Color through fluted glass</span></div>
+              </div>
+            </article>
+
+            <article class="study study--5" data-cursor="Study V">
+              <div class="study__frame" data-gl-scene="4"></div>
+              <span class="study__num serif" data-hspeed="1.2">V</span>
+              <div class="study__label">
+                <div class="mono"><b>Eclipse</b><span>The shape of absence</span></div>
+              </div>
+            </article>
+
+            <div class="track__end mono"><span>End of studies</span><span class="track__end-line"></span></div>
+          </div>
+
+          <!-- caption shown while the drop is full-bleed -->
+          <div class="caption">
+            <div class="caption__big serif">Caustic</div>
+            <div class="caption__meta mono">
+              <span>Study I</span><span>Light, folded by water</span><span>Rendered live — 0 images</span>
+            </div>
+          </div>
+          <div class="journey__progress mono"><span class="jp__bar"><i></i></span><span class="jp__n">I / V</span></div>
+        </div>
+      </section>
+
+      <!-- ───────────── 03 · TRACE (stillness, ink → bone) ───────────── -->
+      <section class="trace" data-chapter="Trace">
+        <div class="trace__inner">
+          <span class="trace__rule"></span>
+          <p class="trace__text">Everything that moves<br />leaves a <em class="serif">trace.</em></p>
+          <span class="trace__rule"></span>
+        </div>
+      </section>
+
+      <!-- ───────────── 04 · MORPH ───────────── -->
+      <section class="morph" id="states" data-chapter="States">
+        <div class="morph__pin">
+          <div class="morph__top mono">
+            <span>(04) — States of matter</span>
+            <ol class="morph__list">
+              <li class="is-on">Solid</li><li>Liquid</li><li>Light</li>
+            </ol>
+          </div>
+          <div class="morph__stage" aria-label="Solid, liquid, light">
+            <div class="morph__word" data-word="SOLID"></div>
+            <div class="morph__word" data-word="LIQUID"></div>
+            <div class="morph__word" data-word="LIGHT"></div>
+          </div>
+          <div class="morph__bottom">
+            <p class="serif">Nothing is ever still.</p>
+            <span class="mono morph__count"><b>01</b> / 03</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────────── 05 · INDEX ───────────── -->
+      <section class="index" id="index" data-chapter="Index">
+        <header class="index__head">
+          <span class="mono">(05)</span>
+          <h2 class="display-l">Index of <em class="serif">experiments</em></h2>
+          <p class="mono">Hover a line to look through it.</p>
+        </header>
+        <ul class="index__list">
+          <li class="row" data-scene="3"><span class="mono row__n">01</span><span class="row__t">Refraction Garden</span><span class="serif row__m">glass</span><span class="mono row__y">2026</span></li>
+          <li class="row" data-scene="0"><span class="mono row__n">02</span><span class="row__t">Caustic Choir</span><span class="serif row__m">water</span><span class="mono row__y">2026</span></li>
+          <li class="row" data-scene="1"><span class="mono row__n">03</span><span class="row__t">Chrome Tides</span><span class="serif row__m">metal</span><span class="mono row__y">2025</span></li>
+          <li class="row" data-scene="2"><span class="mono row__n">04</span><span class="row__t">Vapor Archive</span><span class="serif row__m">air</span><span class="mono row__y">2025</span></li>
+          <li class="row" data-scene="4"><span class="mono row__n">05</span><span class="row__t">Silent Eclipse</span><span class="serif row__m">void</span><span class="mono row__y">2024</span></li>
+        </ul>
+      </section>
+
+      <!-- ───────────── 06 · PORTAL ───────────── -->
+      <section class="portal" data-chapter="Immerse">
+        <div class="portal__pin">
+          <div class="portal__word" aria-hidden="true"></div>
+          <h2 class="sr-only">Immerse</h2>
+          <div class="portal__meta mono"><span>(06)</span><span>Keep scrolling to immerse</span></div>
+          <div class="portal__core" data-blob-portal></div>
+        </div>
+      </section>
+
+      <!-- ───────────── 07 · FINALE ───────────── -->
+      <section class="finale" id="finale" data-chapter="Coda">
+        <div class="finale__core" data-blob-finale></div>
+        <div class="finale__head">
+          <span class="mono">(07) — Coda</span>
+          <p class="finale__line display-m">Light remembers<br />everything it <em class="serif">touches.</em></p>
+        </div>
+        <a class="finale__cta magnetic" href="#top" data-scroll-to="0" data-cursor="Again">
+          <span class="finale__cta-inner"><span class="mono">Begin</span><span class="serif">again</span></span>
+        </a>
+        <footer class="finale__foot mono">
+          <span>© 2026 FLUID Visual Research</span>
+          <span>All frames rendered live · 0 images · 0 videos</span>
+          <span class="finale__links"><a href="#" class="magnetic">Are.na</a><a href="#" class="magnetic">Vimeo</a><a href="#" class="magnetic">Contact</a></span>
+        </footer>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -126,6 +126,7 @@ export class Engine {
     this.title.exit = s.title.exit;
     this.title.finale = s.title.finale;
     this.title.update(t, { W, H, pxToWorld: (z) => this.pxToWorld(z), mouse: { x: mx, y: my }, zPlane: -2.2 });
+    bu.uFloor.value.set(this.title.floor.y * dpr, this.title.floor.a);
 
     // ── dust
     for (const d of [this.dustFar, this.dustNear]) {
@@ -156,6 +157,7 @@ export class Engine {
       bm.uLight.value.set(mx, my);
       bm.uWarm.value = s.warm;
       bm.uLift.value = b.lift ?? 0;
+      bm.uCenter.value.set(b.x / W, 1 - b.y / H);
       bu.uBlob.value.set(b.x * dpr, b.y * dpr, (b.size / 2) * dpr, b.alpha * b.glow);
     } else {
       bu.uBlob.value.set(0, 0, 0, 0);

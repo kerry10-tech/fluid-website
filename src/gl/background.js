@@ -15,6 +15,7 @@ export function createBackground() {
       uBlob: { value: new THREE.Vector4(0, 0, 0, 0) },
       uScroll: { value: 0 },
       uWarm: { value: 0 },
+      uFloor: { value: new THREE.Vector2(0, 0) },
     },
     vertexShader: /* glsl */ `
       varying vec2 vUv;
@@ -23,7 +24,7 @@ export function createBackground() {
     fragmentShader: /* glsl */ `
       precision highp float;
       uniform float uTime, uTheme, uScroll, uWarm;
-      uniform vec2 uRes, uMouse;
+      uniform vec2 uRes, uMouse, uFloor;
       uniform vec4 uBlob;
       varying vec2 vUv;
       ${noise2}
@@ -67,6 +68,16 @@ export function createBackground() {
           // soft contact shadow
           vec2 s = (p - bp - vec2(0.05, -0.95) * br) / br;
           col *= 1.0 - 0.35 * exp(-dot(s * vec2(0.8, 3.0), s * vec2(0.8, 3.0))) * uBlob.w;
+        }
+
+        // the liquid floor the title stands on: horizon glow, an anamorphic
+        // streak, and a cooler, darker plane beneath
+        if (uFloor.y > 0.001) {
+          float fy = (0.5 * uRes.y - uFloor.x) / uRes.y;
+          float dy = p.y - fy;
+          col += vec3(0.15, 0.14, 0.13) * exp(-abs(dy) * 26.0) * uFloor.y * (0.6 + 0.5 * fog);
+          col += vec3(1.0, 0.9, 0.82) * exp(-abs(dy) * 520.0) * exp(-abs(p.x - m.x * 0.3) * 1.2) * 0.16 * uFloor.y;
+          col = mix(col, col * vec3(0.72, 0.75, 0.8), smoothstep(0.0, -0.06, dy) * uFloor.y);
         }
 
         // vignette

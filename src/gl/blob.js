@@ -21,6 +21,7 @@ export function createBlob(detail = 96) {
       uWarm: { value: 0 },
       uLight: { value: new THREE.Vector2() },
       uLift: { value: 0 },
+      uCenter: { value: new THREE.Vector2(0.5, 0.5) },
     },
     vertexShader: /* glsl */ `
       uniform float uTime, uAmp, uFreq, uVel;
@@ -61,7 +62,7 @@ export function createBlob(detail = 96) {
     fragmentShader: /* glsl */ `
       precision highp float;
       uniform sampler2D uBg;
-      uniform vec2 uRes, uLight;
+      uniform vec2 uRes, uLight, uCenter;
       uniform float uOpacity, uTime, uWarm, uLift;
       varying vec3 vNormalV;
       varying vec3 vPosV;
@@ -101,27 +102,32 @@ export function createBlob(detail = 96) {
         float fres = pow(1.0 - NdV, 3.0);
         vec2 suv = gl_FragCoord.xy / uRes;
 
-        // spectral refraction — 9 taps spread across the visible spectrum
-        vec2 dir = -N.xy;
-        float bend = 0.06 + 0.07 * pow(1.0 - NdV, 1.5);
+        // ball-lens refraction: the world behind is seen inverted and magnified,
+        // bending harder toward the rim; 9 taps spread across the spectrum
+        vec2 rel = suv - uCenter;
+        float rim = pow(1.0 - NdV, 2.2);
         vec3 refr = vec3(0.0);
         vec3 wsum = vec3(0.0);
         for (int i = 0; i < 9; i++){
           float s = float(i) / 8.0;
           vec3 w = clamp(vec3(1.0 - abs(s - 0.0) * 2.4, 1.0 - abs(s - 0.5) * 2.4, 1.0 - abs(s - 1.0) * 2.4), 0.0, 1.0);
-          vec2 off = dir * (bend + s * 0.016 * (0.4 + fres * 2.0));
-          refr += texture2D(uBg, suv + off).rgb * w;
+          float k = 0.52 + s * 0.035 * (0.3 + rim * 2.5);
+          vec2 lensUv = uCenter - rel * k - N.xy * (0.012 + vField * 0.01);
+          vec2 edgeUv = suv - N.xy * (0.09 + s * 0.02);
+          vec2 uv = mix(lensUv, edgeUv, smoothstep(0.35, 0.95, rim));
+          refr += texture2D(uBg, uv).rgb * w;
           wsum += w;
         }
         refr /= wsum;
-        // magnify + slightly brighten what we see through the glass
-        refr = refr * vec3(0.9, 0.94, 0.98) + 0.01;
+        // glass absorbs toward the rim (longer path), tinted cool
+        refr *= vec3(0.9, 0.94, 0.98) * mix(1.0, 0.45, smoothstep(0.15, 0.85, rim));
+        refr += 0.008;
 
         vec3 R = reflect(-V, N);
         vec3 refl = studio(R);
 
         vec3 irid = film(fres * 1.4 + vField * 0.6 + uTime * 0.02);
-        vec3 col = refr * (1.0 - fres * 0.55);
+        vec3 col = refr * (1.0 - fres * 0.4);
         col += refl * (0.1 + fres * 1.0) * (1.0 + uLift * 0.8);
         // light gathered at the bottom of the drop (a glass sphere is a lens)
         vec3 glowCol = mix(vec3(1.0, 0.93, 0.85), vec3(1.0, 0.5, 0.22), 0.35 + 0.55 * uWarm);

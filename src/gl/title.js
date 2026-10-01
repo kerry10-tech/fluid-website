@@ -41,6 +41,7 @@ export class Title {
     this.exit = 0; // 0..1 hero exit
     this.finale = 0; // 0..1 coda return
     this.finaleColor = new THREE.Color(1, 0.353, 0.122);
+    this.floor = { y: 0, a: 0 };
   }
 
   build(viewW, viewH, dpr) {
@@ -157,6 +158,11 @@ export class Title {
     const fin = this.finale;
     const k = pxToWorld(zPlane);
 
+    if (this.letters[0]) {
+      const L0 = this.letters[0];
+      this.floor.y = H * 0.5 + L0.capH * 0.5;
+      this.floor.a = Math.min(1, this.reveal * 1.2) * Math.max(0, 1 - exit * 2.5) * (fin > 0 ? 0 : 1);
+    }
     this.letters.forEach((L, i) => {
       const u = L.mesh.material.uniforms;
       u.uTime.value = t;
